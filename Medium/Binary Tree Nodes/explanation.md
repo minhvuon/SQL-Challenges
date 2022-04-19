@@ -1,3 +1,5 @@
+[Binary Tree Nodes](https://www.hackerrank.com/challenges/binary-search-tree-1/problem)
+
 You are given a table, BST, containing two columns: N and P, where N represents the value of a node in Binary Tree, and P is the parent of N.
 
 ![image](https://s3.amazonaws.com/hr-challenge-images/12888/1443818507-5095ab9853-1.png)
