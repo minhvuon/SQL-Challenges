@@ -66,13 +66,13 @@ In company C1, the only lead manager is LM1. There are two senior managers, SM1 
 In company C2, the only lead manager is LM2. There is one senior manager, SM3, under LM2. There are two managers, M2 and M3, under senior manager SM3. There is one employee, E3, under manager M2, and another employee, E4, under manager, M3.
 
 ### Explain code
-```
+```SQL
 select c.company_code, c.founder, 
     count(distinct l.lead_manager_code), 
     count(distinct s.senior_manager_code), 
     count(distinct m.manager_code),
     count(distinct e.employee_code) 
-from Company c, Lead_Manager l, Senior_Manager s, Manager m, Employee e
+from Company c, Lead_Manager l, Senior_Manager s, Manager m, Employee e /* có thể chỉ cần select từ employee table bởi bảng này có đầy đủ các thông tin cần select */
 where c.company_code = l.company_code and 
     l.lead_manager_code = s.lead_manager_code and
     s.senior_manager_code = m.senior_manager_code and
@@ -80,3 +80,4 @@ where c.company_code = l.company_code and
 group by c.company_code, c.founder
 order by c.company_code;
 ```
+- Đếm số lượng các vị trí theo tường công ty dựa trên company_code, founder
