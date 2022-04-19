@@ -1,3 +1,5 @@
+[Challenges](https://www.hackerrank.com/challenges/challenges/problem)
+
 Julia asked her students to create some coding challenges. Write a query to print the hacker_id, name, and the total number of challenges created by each student. Sort your results by the total number of challenges in descending order. If more than one student created the same number of challenges, then sort the result by hacker_id. If more than one student created the same number of challenges and the count is less than the maximum number of challenges created, then exclude those students from the result.
 
 **Input Format**
@@ -59,20 +61,26 @@ For Sample Case 1, we can get the following details:
 Students **12299** and **34856** both created **6** challenges. Because **6** is the maximum number of challenges created, these students are included in the result.
 
 ### Explain code
-```
+```SQL
 select *
-from (select c.hacker_id, h.name, count(c.hacker_id) as numchal
-    from challenges c
-        join hackers h on c.hacker_id = h.hacker_id
-    group by c.hacker_id, h.name) temp
-where (select count(temp1.numchal) from (select c.hacker_id, h.name, count(c.hacker_id) as numchal
-                                            from challenges c
-                                                join hackers h on c.hacker_id = h.hacker_id
-                                            group by c.hacker_id, h.name) temp1
-                                        where temp1.numchal = temp.numchal) = 1 
-    or temp.numchal = (select max(temp2.numchal) from (select c.hacker_id, h.name, count(c.hacker_id) as numchal
-                                            from challenges c
-                                                join hackers h on c.hacker_id = h.hacker_id
-                                            group by c.hacker_id, h.name) temp2)
+from (select c.hacker_id, h.name, count(c.hacker_id) as numchal /* tạo temp table chứa hacker_id, name, số lượng challenge dựa trên hacker_id và name */
+        from challenges c
+            join hackers h on c.hacker_id = h.hacker_id
+        group by c.hacker_id, h.name
+    ) temp
+where (select count(temp1.numchal) /* đếm số lượng challenge trùng nhau giữa các hacker */
+        from (select c.hacker_id, h.name, count(c.hacker_id) as numchal 
+                from challenges c
+                    join hackers h on c.hacker_id = h.hacker_id
+                group by c.hacker_id, h.name
+            ) temp1
+        where temp1.numchal = temp.numchal 
+        ) = 1 /* kiểm tra điều kiện nếu không có hacker nào có số lượng challenge bằng hacker này */
+    or temp.numchal = (select max(temp2.numchal) /* hoặc nếu số lượng challenge của hacker đó bằng maximun */
+                        from (select c.hacker_id, h.name, count(c.hacker_id) as numchal
+                                from challenges c
+                                    join hackers h on c.hacker_id = h.hacker_id
+                                group by c.hacker_id, h.name) temp2) 
 order by temp.numchal desc, temp.hacker_id;
 ```
+Select hacker_id, name và số lượng challenge của hacker đó từ 2 table challenges và hackers với điều kiện nếu lượng challenge của hacker đó không trùng với hacker nào khác hoặc số lượng challenge của mỗi hacker có thể giống nhau nhưng số lượng phải là lớn nhất.
