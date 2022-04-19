@@ -38,4 +38,7 @@ select if(p is null, concat(n, ' Root'),
 from BST
 order by n;
 ```
-Duyệt qua table BST. Kiểm tra điều kiện if nếu node trong N có giá trị null trong P thì đó là node gốc, tiếp theo ta sẽ kiểm tra điều kiện nếu các node trong N không xuất hiện trong P thì đó là node lá, bởi vì node lá không phải là parent của node nào cả. Những node còn lại là node inner
+- Duyệt qua table BST
+- Kiểm tra điều kiện nếu node trong N có giá trị null trong P thì đó là node gốc
+- Tiếp theo kiểm tra điều kiện nếu các node trong N không xuất hiện trong P thì đó là node lá, bởi vì node lá không phải là parent của node nào cả. 
+- Những node còn lại là node inner
