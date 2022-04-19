@@ -45,7 +45,7 @@ from ( select
     case when occupation = 'singer' then name end as singer,
     case when occupation = 'actor' then name end as actor
 from occupations
-order by name) as temp /* tạo temp table có các column là occupation và value là name hoặc 
+order by name) as temp /* tạo temp table có các column là occupation và value là name hoặc null */
 group by rownumber;
 ```
 - Tạo temp table có các column occupation chứa những value name và column flag để biết được name thuộc row nào
