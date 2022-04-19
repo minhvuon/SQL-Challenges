@@ -1,3 +1,5 @@
+[Top Competitors](https://www.hackerrank.com/challenges/full-score/problem)
+
 Julia just finished conducting a coding contest, and she needs your help assembling the leaderboard! Write a query to print the respective hacker_id and name of hackers who achieved full scores for more than one challenge. Order your output in descending order by the total number of challenges in which the hacker earned a full score. If more than one hacker received full scores in same number of challenges, then sort them by ascending hacker_id.
 
 **Input Format**
@@ -53,7 +55,7 @@ Hacker 90411 got a score of 100 for challenge 66730 with a difficulty level of 6
 Only hacker 90411 managed to earn a full score for more than one challenge, so we print the their hacker_id and name as **2** space-separated values.
 
 ### Explain code
-```
+```SQL
 select s.hacker_id, h.name
 from submissions s
     join challenges c on s.challenge_id = c.challenge_id
@@ -64,3 +66,6 @@ group by s.hacker_id, h.name
 having count(s.hacker_id) > 1
 order by count(s.hacker_id) desc, s.hacker_id asc;
 ```
+- Join các table lại với nhau để biết được dificulty level và full score của level
+- Lọc ra những hacker có số điểm bằng với full score của level
+- Lọc ra những hacker có 2 submission full score trở lên
