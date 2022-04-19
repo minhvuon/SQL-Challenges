@@ -85,5 +85,5 @@ order by temp.numchal desc, temp.hacker_id;
 ```
 - Tạo temp table chứa số lượng challenge của mỗi hacker
 - Select hacker_id, name và số lượng challenge của hacker đó từ temp table 
-- điều kiện nếu lượng challenge của hacker đó không trùng với hacker nào khác, dựa và temp table biết được số lượng challenge của mỗi hacker
-- hoặc số lượng challenge của mỗi hacker có thể giống nhau nhưng số lượng phải là lớn nhất.
+- Điều kiện nếu lượng challenge của hacker đó không trùng với hacker nào khác, dựa và temp table biết được số lượng challenge của mỗi hacker
+- Hoặc số lượng challenge của mỗi hacker có thể giống nhau nhưng số lượng phải là lớn nhất.
