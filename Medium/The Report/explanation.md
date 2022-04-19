@@ -43,7 +43,7 @@ So, the following students got 8, 9 or 10 grades:
 * Scarlet (grade 8)
 
 ### Explain code
-```
+```SQ
 select if(g.grade > 7, s.name, null), g.grade, s.marks
 from students s, grades g
 where marks between min_mark and max_mark
