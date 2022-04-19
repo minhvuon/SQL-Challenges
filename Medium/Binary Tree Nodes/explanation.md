@@ -29,7 +29,7 @@ The Binary Tree below illustrates the sample:
 ![image](https://s3.amazonaws.com/hr-challenge-images/12888/1443773633-f9e6fd314e-simply_sql_bst.png)
 
 ### Explain code
-```
+```SQL
 select if(p is null, concat(n, ' Root'), 
           if(n in (select p from BST), concat(n, ' Inner'), 
              concat(n, ' Leaf')))
