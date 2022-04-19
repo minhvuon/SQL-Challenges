@@ -1,3 +1,5 @@
+[Weather Observation 18](https://www.hackerrank.com/challenges/weather-observation-station-18/problem)
+
 Consider **P1(a,b)** and **P2(c,d)** to be two points on a 2D plane.
 
 * **a** happens to equal the minimum value in Northern Latitude (LAT_N in **STATION**).
@@ -14,7 +16,7 @@ The **STATION** table is described as follows:
 
 where LAT_N is the northern latitude and LONG_W is the western longitude.
 ### Explain code
-```
+```SQL
 select round(abs(min(lat_n) - max(lat_n)) + (max(long_w) - min(long_w)), 4)
 from station;
 ```
