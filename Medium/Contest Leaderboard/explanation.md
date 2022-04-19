@@ -1,3 +1,5 @@
+[Contest Leaderboard](https://www.hackerrank.com/challenges/contest-leaderboard/problem)
+
 You did such a great job helping Julia with her last coding contest challenge that she wants you to work on this one, too!
 
 The total score of a hacker is the sum of their maximum scores for all of the challenges. Write a query to print the hacker_id, name, and total score of the hackers ordered by the descending score. If more than one hacker achieved the same total score, then sort the result by ascending hacker_id. Exclude all hackers with a total score of **0** from your result.
@@ -45,13 +47,16 @@ Hacker 84072 submitted solutions for challenges 49593 and 63132, so the total sc
 The total scores for hackers 4806, 26071, 80305, and 49438 can be similarly calculated.
 
 ### Explain code
-```
-select h.hacker_id, h.name, sum(maxscore) as sumscore
+```SQL
+select h.hacker_id, h.name, sum(maxscore) as sumscore /* tính tổng điểm của các challenge mà các hacker đã làm */
 from (select s.hacker_id, s.challenge_id, max(score) as maxscore
     from submissions s 
-    group by s.hacker_id, s.challenge_id) temp
+    group by s.hacker_id, s.challenge_id) temp /* tạo temp table chứa những điểm lớn nhất của các challenge mà các hacker đã làm */
     join hackers h on temp.hacker_id = h.hacker_id
 group by h.hacker_id, h.name
-having sumscore > 0
+having sumscore > 0 /* lọc ra những hacker có tổng điểm lớn hơn 0 */
 order by sumscore desc, h.hacker_id asc;
 ```
+- Tạo ra bảng tạm chứa số điểm lớn nhất của các challenge mà những hacker đã làm
+- Tính tổng số điểm các hacker dựa trên bảng tạm
+- Loại bỏ các hacker có số điểm bằng 0
