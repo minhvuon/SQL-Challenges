@@ -1,3 +1,5 @@
+[The PADS](https://www.hackerrank.com/challenges/the-pads/problem)
+
 Generate the following two result sets:
 
 1. Query an alphabetically ordered list of all names in **OCCUPATIONS**, immediately followed by the first letter of each profession as a parenthetical (i.e.: enclosed in parentheses). For example: ```AnActorName(A)```, ```ADoctorName(D)```, ```AProfessorName(P)```, and ```ASingerName(S)```.
@@ -42,7 +44,7 @@ The results of the first query are formatted to the problem description's specif
 The results of the second query are ascendingly ordered first by number of names corresponding to each profession (**2 <= 2 <= 3 <= 3**), and then alphabetically by profession (**doctor <= singer**, and **actor <= professor**).
 
 ### Explain code
-```
+```SQL
 set @str='There are a total of ';
 select 
     if(occupation = 'Doctor', concat(name, '(D)'), 
@@ -64,7 +66,10 @@ from (select
             when occupation = 'Singer' then count(*) end as countocc,
             occupation
     from occupations
-    group by occupation) Temp
+    group by occupation) Temp /* tạo temp table chứa tổng số lượng các occupation */
 group by countocc, occupation
 order by countocc, occupation;
 ```
+- Câu lệnh select thứ nhất kiểm tra điều kiện nếu occupation thoải điều kiện thì gán kí tự đầu tiên của occupation vào name
+- Câu lệnh thứ 2, lấy max của column chứa số lượng occupation group theo occupation,
+- Sắp xêp theo số lượng occupation và name occupation
