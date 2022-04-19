@@ -50,4 +50,4 @@ group by rownumber;
 ```
 - Tạo temp table có các column occupation chứa những value name và column flag để biết được name thuộc row nào
 - Group temp table theo column flag
-- sử dụng hàm min để loại bỏ các giá trị null trong table và gộp các value name lại với nhau chung một hàng dựa trên flag
+- ử dụng hàm min để loại bỏ các giá trị null trong table và gộp các value name lại với nhau chung một hàng dựa trên flag
