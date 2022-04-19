@@ -15,7 +15,7 @@ from(
         information_schema.tables t1,
         information_schema.tables t2,
         (select @num:=1) temp
-) temp2 /* tạo temp table chứa dãy số từ 1 đến 1000
+) temp2 /* tạo temp table chứa dãy số từ 1 đến 1000 */
 where numb <= 1000 and not exists ( 
     select *
     from(
