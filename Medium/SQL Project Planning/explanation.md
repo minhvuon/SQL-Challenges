@@ -1,3 +1,5 @@
+[SQL Project Planning](https://www.hackerrank.com/challenges/sql-projects/problem)
+
 You are given a table, Projects, containing three columns: Task_ID, Start_Date and End_Date. It is guaranteed that the difference between the End_Date and the Start_Date is equal to 1 day for each row in the table.
 
 ![image](https://s3.amazonaws.com/hr-challenge-images/12894/1443819551-639948acc0-1.png)
@@ -28,18 +30,19 @@ The example describes following four projects:
 
 ### Explain code
 
-```
-set @flat=0;
+```SQL
+set @flag=0;
 select min(startdate), min(enddate)
 from (select
-    case when p.start_date in (select end_date from projects) then @flat
-        when p.start_date not in (select end_date from projects) then @flat:=@flat+1 end as flat,
-    case when p.start_date not in (select end_date from projects) then p.start_date end as startdate,
-    case when p.end_date not in (select start_date from projects) then p.end_date end as enddate
-from projects p
-group by p.start_date, p.end_date
-order by p.start_date asc) temp
-group by flat
-order by count(flat) asc;
+        case when p.start_date in (select end_date from projects) then @flag
+            when p.start_date not in (select end_date from projects) then @flag:=@flag+1 end as flag,
+        case when p.start_date not in (select end_date from projects) then p.start_date end as startdate,
+        case when p.end_date not in (select start_date from projects) then p.end_date end as enddate
+    from projects p
+    group by p.start_date, p.end_date
+    order by p.start_date asc) temp /* tạo temp table chứa start date, end date của project và column flag để đánh dấu start and end date thuộc project nào */
+group by flag
+order by count(flag) asc;
 ```
-
+- Tạo temp table
+- select min hai column start and end date để loại bỏ value null, group theo column flag
