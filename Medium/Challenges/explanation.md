@@ -83,4 +83,7 @@ where (select count(temp1.numchal) /* đếm số lượng challenge trùng nhau
                                 group by c.hacker_id, h.name) temp2) 
 order by temp.numchal desc, temp.hacker_id;
 ```
-Select hacker_id, name và số lượng challenge của hacker đó từ 2 table challenges và hackers với điều kiện nếu lượng challenge của hacker đó không trùng với hacker nào khác hoặc số lượng challenge của mỗi hacker có thể giống nhau nhưng số lượng phải là lớn nhất.
+- Tạo temp table chứa số lượng challenge của mỗi hacker
+- Select hacker_id, name và số lượng challenge của hacker đó từ temp table 
+- điều kiện nếu lượng challenge của hacker đó không trùng với hacker nào khác, dựa và temp table biết được số lượng challenge của mỗi hacker
+- hoặc số lượng challenge của mỗi hacker có thể giống nhau nhưng số lượng phải là lớn nhất.
