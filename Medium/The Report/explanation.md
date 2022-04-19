@@ -1,3 +1,5 @@
+[The Report](https://www.hackerrank.com/challenges/the-report/problem)
+
 You are given two tables: Students and Grades. Students contains three columns ID, Name and Marks.
 
 ![image](https://user-images.githubusercontent.com/54706711/163750239-7ca4eb16-5802-4ed7-b6a6-bab28aa996fc.png)
@@ -47,6 +49,5 @@ from students s, grades g
 where marks between min_mark and max_mark
 order by g.grade desc, s.name asc, s.marks asc;
 ```
-Cần select name, grade và mark từ hai bảng students và grades, sử dụng điều kiện where để lọc ra những marks đúng với grade dựa vào min_mark và max_mark.
-
-Dùng điều kiện if trong lệnh select để tìm ra những name có grade nhỏ hơn 7 và gán value of name = null.
+- Cần select name, grade và mark từ hai bảng students và grades, sử dụng điều kiện where để lọc ra những marks đúng với grade dựa vào min_mark và max_mark.
+- Dùng điều kiện if trong lệnh select để tìm ra những name có grade nhỏ hơn 7 và gán value of name = null.
