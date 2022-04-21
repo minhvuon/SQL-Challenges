@@ -10,11 +10,11 @@ The following tables hold contest data:
 
 * Hackers: The hacker_id is the id of the hacker, and name is the name of the hacker.
 
-![image](
+![image](https://s3.amazonaws.com/hr-challenge-images/19597/1458511164-12adec3b8b-ScreenShot2016-03-21at3.26.47AM.png)
 
 * Submissions: The submission_date is the date of the submission, submission_id is the id of the submission, hacker_id is the id of the hacker who made the submission, and score is the score of the submission.
 
-![image](
+![image](https://s3.amazonaws.com/hr-challenge-images/19597/1458511251-0b534030b9-ScreenShot2016-03-21at3.26.56AM.png)
 
 **Sample Input**
 
@@ -22,11 +22,11 @@ For the following sample input, assume that the end date of the contest was Marc
 
 Hackers Table:
 
-![image](
+![image](https://s3.amazonaws.com/hr-challenge-images/19597/1458511957-814a2c7bf2-ScreenShot2016-03-21at3.27.06AM.png)
 
 Submissions Table:
 
-![image](
+![image](https://s3.amazonaws.com/hr-challenge-images/19597/1458512015-ff6a708164-ScreenShot2016-03-21at3.27.21AM.png)
 
 **Sample Output**
 ```
@@ -55,24 +55,36 @@ On March 06, 2016 only **20703** made submission, so there is only **1** unique 
 ```SQL
 select temp2.submission_date, temp2.unihacker, temp2.hk, h.name
 from( select temp.submission_date, 
-        (select count(distinct hacker_id)  
+        (select count(distinct hacker_id) /* đếm số lượng hacker submit trong ngày */
         from submissions s2  
         where s2.submission_date = temp.submission_date 
+            /* điều kiện đảm bảo hacker đó phải submit liên tục */
             and (select count(distinct s3.submission_date) 
                  from submissions s3 
                  where s3.hacker_id = s2.hacker_id 
-                    and s3.submission_date < temp.submission_date) = dateDIFF(temp.submission_date , '2016-03-01')) as unihacker, min(temp.hacker_id) as hk
+                    and s3.submission_date < temp.submission_date) = dateDIFF(temp.submission_date , '2016-03-01')) as unihacker
+                    /* đếm số lần submit của hacker đó từ ngày hiện tại trở về ngày 01-03, nếu số lần submit bằng số ngày thì hacker đó submit liên tục */ 
+        , min(temp.hacker_id) as hk /* hacker có id nhỏ nhất */
     from (select s.submission_date, s.hacker_id, count(s.hacker_id) as counthk
         from submissions s
-        group by s.submission_date, s.hacker_id) temp
+        group by s.submission_date, s.hacker_id) temp /* tạo temp table chứa số lần submit của mỗi hacker trong 1 ngày */
     where counthk = (select max(counthk) 
                      from (select s.submission_date, s.hacker_id, count(s.hacker_id) as counthk
                             from submissions s
                             group by s.submission_date, s.hacker_id) temp1
                      where temp.submission_date = temp1.submission_date
-                    group by temp1.submission_date)
+                    group by temp1.submission_date) /* lọc ra những id có số lần submit nhiều nhất trong một ngày */
     group by temp.submission_date) temp2, hackers h
 where temp2.hk = h.hacker_id
 order by temp2.submission_date;
 ```
-- 
+- Đếm số lượng hacker submit liên tục: 
+Điều kiện để đếm là những hacker submit liên tục từ ngày 01-03 tới ngày đang xét
+
+- Tìm những hacker có số lần submit nhiều nhất trong một ngày:
+
+Tạo temp table chứa những hacker có số lần submit nhiều nhất trong ngày 
+
+Lấy hacker_id có có số lần submit nhiều nhất trong ngày và hacker_id là nhỏ nhất
+
+Cuối cùng là select từ hackers table để lấy name của hacker đó
