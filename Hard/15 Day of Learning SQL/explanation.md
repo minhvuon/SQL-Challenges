@@ -79,6 +79,7 @@ where temp2.hk = h.hacker_id
 order by temp2.submission_date;
 ```
 - Đếm số lượng hacker submit liên tục: 
+
 Điều kiện để đếm là những hacker submit liên tục từ ngày 01-03 tới ngày đang xét
 
 - Tìm những hacker có số lần submit nhiều nhất trong một ngày:
