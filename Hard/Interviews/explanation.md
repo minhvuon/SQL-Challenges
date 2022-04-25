@@ -88,3 +88,6 @@ from (select cl.contest_id, ct.hacker_id, ct.name, sum(ss.total_submissions) as 
 having (temp.sumsub + temp.sumaccsub + temp1.sumview + temp1.sumuniview) > 0
 order by temp.contest_id;
 ```
+- Tạo ra 1 temp table chứa id, name và tổng số lượng submissions, tổng số lượng accept submissions
+- Tạo ra 1 temp table chứa id, name và tổng số lượng views, tổng số lượng unique views 
+- Cuối cùng join 2 temp table này với nhau theo id để lấy ra tổng.
